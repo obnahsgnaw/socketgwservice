@@ -1,0 +1,14 @@
+[Unit]
+Description=efly cetc redis server
+Requires=network.target
+After=network-online.target
+
+[Service]
+ExecStart=/usr/local/bin/_app_ start
+ExecStop=/usr/local/bin/_app_ stop
+Type=simple
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

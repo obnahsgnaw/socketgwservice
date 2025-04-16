@@ -1,0 +1,14 @@
+[Unit]
+Description=efly cetc redis server
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/local/bin/_app_ start
+ExecStop=/usr/local/bin/_app_ stop
+Type=oneshot
+RemainAfterExit=true
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
