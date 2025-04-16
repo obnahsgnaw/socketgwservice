@@ -1,0 +1,146 @@
+application:
+  # cluster id if not set the server will run as a independent server, and id will be set as independent_Project.key(), and no route prefix
+  id: dev
+  # cluster name default as the cluster id
+  name: dev
+  # internal server ip, other can access, 0.0.0.0
+  internalIp: 127.0.0.1
+  # print cli log or not
+  debug: true
+  # Trusted proxy ip, the gateway ip, multi
+  trustedProxies:
+    - 127.0.0.1
+  #enable http engine to debug mode
+  routeDebug: false
+
+# log config
+log:
+  # log dir
+  dir:
+  # max size (M) default:  100
+  maxSize: 100
+  # max backup  default:  5
+  maxBackup: 5
+  # max age (day)  default:  5
+  maxAge: 5
+  # level, default=info,  debug,info, warn,error...
+  level: debug
+  # trace level, default=error,  debug,info, warn,error...
+  traceLevel: error
+
+# register config, if register is local will add route prefix
+register:
+  # driver, etcd, local, ....
+  driver: etcd
+  # etcd endpoints, etcd:2379
+  endpoints: 127.0.0.1:2379
+  # operate timeout
+  timeout: 5
+  # register ttl
+  regTtl: 5
+
+# cors for debug when no gateway
+cors:
+  # cors origin, if no gateway, all=*, empty is disable cors
+  allowOrigin: "*"
+  # true or false default=true
+  allowCredentials: true
+
+# socket gateway
+tcpgw:
+  # frontend
+  frontend:
+    # port， use for http api、rpc、socket handler
+    port: 80
+    # api service will not register
+    apiDisable: false
+    # rpc service will not register
+    rpcDisable: false
+    # doc page will not register
+    docDisable: false
+    # for doc debug when the frontend server not enabled with the backend server, protocol://ip:port
+    debugOrigin:
+    # socket gateway
+    socketGateways:
+      # business channel
+      outer:
+        # socket type  tcp, udp, wss, http, mqtt
+        tcp:
+          # socket server port
+          port: 8010
+          # socket remote handler rpc port
+          rpcPort: 8011
+          # socket keepalive, second
+          KeepaliveInterval: 10
+          # connect no auth timeout second
+          authCheckInterval: 10
+          # second, active timeout will be closed
+          heartbeatInterval: 15
+          # socket ticker loop interval
+          tickInterval: 10
+          # security enabled
+          security: false
+          # socket security private key path
+          securityPrivateKeyPath:
+          # socket security private key for all authenticate
+          securityPrivateKeyForAll: false
+          # socket security type, default=aes256
+          securityType: aes256
+          # socket security encoder, default=b64, option: b64,hex
+          securityEncoder: b64
+          # socket security encode
+          securityEncode: false
+          # with user authenticate
+          userAuthenticate: false
+          # entry name
+          entryName:
+          # mqtt just for mqtt
+          mqtt:
+            # mqtt tcp addr
+            addr:
+            # mqtt tcp username, empty with no auth
+            username:
+            # mqtt tcp password, empty with no auth
+            password:
+            # other raw topics
+            rawTopics:
+              # topic, must with device_sn, format xxx/{device_sn}/xxx
+              - topic:
+                #qos 0 1 2
+                qos:
+      # business channel
+      inner:
+        # socket type  tcp, udp, wss, http, mqtt
+        wss:
+          # socket server port
+          port: 8012
+          # socket remote handler rpc port
+          rpcPort:
+          # socket keepalive, second
+          KeepaliveInterval: 10
+          # connect no auth timeout second
+          authCheckInterval: 10
+          # second, active timeout will be closed
+          heartbeatInterval: 15
+          # socket ticker loop interval
+          tickInterval: 10
+          # security enabled
+          security: false
+          # socket security private key path
+          securityPrivateKeyPath:
+          # socket security private key for all authenticate
+          securityPrivateKeyForAll: false
+          # socket security type, default=aes256
+          securityType: aes256
+          # socket security encoder, default=b64, option: b64,hex
+          securityEncoder: b64
+          # socket security encode
+          securityEncode: false
+          # with user authenticate
+          userAuthenticate: false
+          # entry name
+          entryName: wss
+  # backend
+  backend:
+    # port，use for http api、rpc
+    port: 88

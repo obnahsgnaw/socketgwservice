@@ -1,0 +1,3 @@
+# optionally mirror configuration can be done by defining it as a registry.
+[registry."123.57.246.85:5000"]
+  http = true

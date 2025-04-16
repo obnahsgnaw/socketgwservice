@@ -1,0 +1,45 @@
+application:
+  id:
+  name:
+  internalIp:
+  debug: true
+  trustedProxies:
+    - 127.0.0.1
+  routeDebug: false
+
+log:
+  dir: /var/log/app
+  maxSize: 100
+  maxBackup: 5
+  maxAge: 5
+  level: info
+  traceLevel: error
+
+etcd:
+  endpoints: zy-etcd:2379
+  timeout: 5
+  regTtl: 5
+
+database:
+  hostname: zy-mysql
+  port: 3306
+  user: root
+  password: <DEFAULT>
+  database: ytdb_v2
+  migrate: true
+  debug: false
+
+redis:
+  hostname: zy-redis
+  port: 6379
+  password: <DEFAULT>
+
+cors:
+  allowOrigin: "*"
+  allowCredentials: true
+
+framework:
+  frontend:
+    port: 8080
+  backend:
+    port: 8090
